@@ -1,4 +1,6 @@
 import 'package:farmacia_app/screens/base/base_screen.dart';
+import 'package:farmacia_app/screens/splash/splash_screen.dart';
+import 'package:farmacia_app/screens/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,11 +15,11 @@ class MyApp extends StatelessWidget {
       title: 'Farmácia',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: AppColors.COR_PALLETA,
         fontFamily: 'Roboto',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: BaseScreen(),
+      home: SplashScreen(),
     );
   }
 }

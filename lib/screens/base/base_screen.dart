@@ -1,4 +1,5 @@
 import 'package:farmacia_app/screens/home/home_screen.dart';
+import 'package:farmacia_app/screens/menu/menu_screen.dart';
 import 'package:flutter/material.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -27,7 +28,7 @@ class _BaseScreenState extends State<BaseScreen> {
           HomeScreen(),
           Container(color: Colors.grey),
           Container(color: Colors.red),
-          Container(color: Colors.blueAccent),
+          MenuScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -49,7 +50,12 @@ class _BaseScreenState extends State<BaseScreen> {
             label: 'Ofertas',
           ),
           BottomNavigationBarItem(
-              icon: Icon(_currentPage == 2 ? Icons.shopping_bag : Icons.shopping_bag_outlined), label: 'Compras'),
+              icon: Icon(
+                _currentPage == 2
+                    ? Icons.shopping_bag
+                    : Icons.shopping_bag_outlined,
+              ),
+              label: 'Compras'),
           BottomNavigationBarItem(
             icon: Icon(
               _currentPage == 3 ? Icons.more_horiz : Icons.more_horiz_outlined,
