@@ -1,5 +1,7 @@
 import 'package:farmacia_app/screens/home/home_screen.dart';
 import 'package:farmacia_app/screens/menu/menu_screen.dart';
+import 'package:farmacia_app/screens/offer/offer_screen.dart';
+import 'package:farmacia_app/screens/purchase/purchase_screen.dart';
 import 'package:flutter/material.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -26,8 +28,8 @@ class _BaseScreenState extends State<BaseScreen> {
         controller: _pageController,
         children: [
           HomeScreen(),
-          Container(color: Colors.grey),
-          Container(color: Colors.red),
+          OfferScreen(),
+          PurchaseScreen(),
           MenuScreen(),
         ],
       ),
