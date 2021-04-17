@@ -24,6 +24,7 @@ class MenuTile extends StatelessWidget {
         color: AppColors.COR_PRIMARIA,
         size: 15,
       ),
+      onTap: onTap,
     );
   }
 }

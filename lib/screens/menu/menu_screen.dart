@@ -1,9 +1,9 @@
 import 'package:farmacia_app/screens/menu/components/buttom_tile.dart';
 import 'package:farmacia_app/screens/menu/components/menu_tili.dart';
 import 'package:farmacia_app/screens/menu/components/sair_tile.dart';
+import 'package:farmacia_app/screens/menu/components/session_%20header.dart';
 import 'package:farmacia_app/screens/menu/components/session_tile.dart';
-import 'package:farmacia_app/screens/themes/app_colors.dart';
-import 'package:farmacia_app/screens/themes/constants.dart';
+import 'package:farmacia_app/screens/menu/components/version_app.dart';
 import 'package:flutter/material.dart';
 
 class MenuScreen extends StatelessWidget {
@@ -13,52 +13,9 @@ class MenuScreen extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.symmetric(vertical: 8),
         children: [
-          Container(
-            height: 150,
-            child: Row(
-              children: [
-                Container(
-                  child: Image.asset(
-                    "assets/images/menina.png",
-                  ),
-                  height: 80,
-                  width: 80,
-                  margin: EdgeInsets.symmetric(horizontal: 12),
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Clodoaldo Ribeiro Santos",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                            color: Colors.black54),
-                      ),
-                      FlatButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        child: Text(
-                          "Alterar perfil",
-                          softWrap: true,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w900,
-                            fontSize: 16,
-                            color: AppColors.COR_PALLETA,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SessionTile(
-            title: "Minha conta",
-          ),
+          SessionHeader(nome: "Clodoaldo Ribeiro"),
+          //Senssão de dado do usuário
+          SessionTile(title: "Minha conta"),
           MenuTile(
             icon: Icons.notifications_rounded,
             titulo: "Meus lembretes",
@@ -84,9 +41,9 @@ class MenuScreen extends StatelessWidget {
             titulo: "Alterar senha",
             onTap: () {},
           ),
-          SessionTile(
-            title: "Configurações",
-          ),
+
+          //Senssão de dado de configurações
+          SessionTile(title: "Configurações"),
           MenuTile(
             icon: Icons.security_rounded,
             titulo: "Privadidade de dados",
@@ -102,9 +59,9 @@ class MenuScreen extends StatelessWidget {
             valeu: true,
             onChanged: (valeu) {},
           ),
-          SessionTile(
-            title: "Serviços",
-          ),
+
+          //Senssão de serviços do app
+          SessionTile(title: "Serviços"),
           MenuTile(
             icon: Icons.help_rounded,
             titulo: "Ajuda",
@@ -128,12 +85,7 @@ class MenuScreen extends StatelessWidget {
           SairTile(
             onTap: () {},
           ),
-          Container(height: 50,
-          color: Colors.grey[100],
-          child: Center(
-            child: Text("${kVERSAO_APP}", style: TextStyle(
-                fontWeight: FontWeight.w700, color: Colors.grey[600], fontSize: 16), ),
-          ),),
+          VersionApp(),
         ],
       ),
     );
