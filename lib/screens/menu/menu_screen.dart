@@ -27,6 +27,16 @@ class MenuScreen extends StatelessWidget {
             onTap: () {},
           ),
           MenuTile(
+            icon: Icons.favorite,
+            titulo: "Meus favoritos",
+            onTap: () {},
+          ),
+          MenuTile(
+            icon: Icons.shopping_basket_sharp,
+            titulo: "Minha cesta",
+            onTap: () {},
+          ),
+          MenuTile(
             icon: Icons.credit_card_rounded,
             titulo: "Meus cartões",
             onTap: () {},
@@ -41,7 +51,6 @@ class MenuScreen extends StatelessWidget {
             titulo: "Alterar senha",
             onTap: () {},
           ),
-
           //Senssão de dado de configurações
           SessionTile(title: "Configurações"),
           MenuTile(
