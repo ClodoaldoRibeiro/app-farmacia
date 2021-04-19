@@ -13,7 +13,7 @@ class VersionApp extends StatelessWidget {
           style: TextStyle(
               fontWeight: FontWeight.w700,
               color: Colors.grey[600],
-              fontSize: 16),
+              fontSize: 14),
         ),
       ),
     );

@@ -16,8 +16,10 @@ class _BaseScreenState extends State<BaseScreen> {
   void setPage(int pagina) {
     setState(() {
       _currentPage = pagina;
-      _pageController.animateToPage(pagina,
-          duration: Duration(milliseconds: 500), curve: Curves.easeIn);
+      _pageController.jumpToPage(pagina);
+
+      // _pageController.animateToPage(pagina,
+      //     duration: Duration(milliseconds: 500), curve: Curves.easeIn);
     });
   }
 
@@ -26,6 +28,7 @@ class _BaseScreenState extends State<BaseScreen> {
     return Scaffold(
       body: PageView(
         controller: _pageController,
+        physics: NeverScrollableScrollPhysics(), //Não aceita o pegeviewer logar
         children: [
           HomeScreen(),
           OfferScreen(),
@@ -38,7 +41,6 @@ class _BaseScreenState extends State<BaseScreen> {
         type: BottomNavigationBarType.fixed,
         selectedFontSize: 10,
         onTap: (value) {
-          print(value);
           setPage(value);
         },
         items: [
