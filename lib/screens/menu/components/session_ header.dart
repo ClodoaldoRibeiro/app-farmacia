@@ -1,7 +1,9 @@
 import 'package:farmacia_app/modelos/user.dart';
+import 'package:farmacia_app/screens/authentication/authentication_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
 import 'package:farmacia_app/screens/themes/constants.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SessionHeader extends StatelessWidget {
@@ -112,12 +114,20 @@ class SessionSingin extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 5,),
+          SizedBox(
+            height: 5,
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: FarRaiseButton(
-              child: Text("Cadastrar ou entrar", style: TextStyle(fontWeight: FontWeight.w600),),
-              pressed: () {},
+              child: Text(
+                "Cadastrar ou entrar",
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
+              pressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => AuthenticationScreen()));
+              },
             ),
           ),
         ],

@@ -1,5 +1,5 @@
-import 'package:farmacia_app/screens/widget/field_app_bar.dart';
-import 'package:farmacia_app/screens/widget/field_search.dart';
+import 'file:///C:/src/MyProjects/farmacia_app/lib/screens/widgets/field_app_bar.dart';
+import 'file:///C:/src/MyProjects/farmacia_app/lib/screens/widgets/field_search.dart';
 import 'package:flutter/material.dart';
 
 class PurchaseScreen extends StatelessWidget {
