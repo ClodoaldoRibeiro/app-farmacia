@@ -1,9 +1,19 @@
-import 'package:farmacia_app/screens/base/base_screen.dart';
 import 'package:farmacia_app/screens/splash/splash_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
+import 'package:farmacia_app/stores/user_manager_store.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+
+
+
+void setupLocators() {
+  // GetIt.I.registerSingleton(ConnectivityStore());
+  GetIt.I.registerSingleton(UserManagerStore());
+}
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setupLocators();
   runApp(MyApp());
 }
 
