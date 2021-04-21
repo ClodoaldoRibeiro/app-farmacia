@@ -11,7 +11,7 @@ class FarRaiseButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 42,
+      height: 45,
       margin: EdgeInsets.only(top: 12, bottom: 12),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
@@ -19,7 +19,7 @@ class FarRaiseButton extends StatelessWidget {
         color: Colors.blue[900],
         child: child,
         textColor: Colors.white,
-        disabledColor: Colors.blue.withAlpha(120),
+        disabledColor: Colors.blue.shade700,
         onPressed: pressed,
       ),
     );
