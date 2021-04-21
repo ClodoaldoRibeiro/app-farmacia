@@ -1,5 +1,6 @@
 import 'package:farmacia_app/modelos/user.dart';
 import 'package:farmacia_app/screens/authentication/authentication_screen.dart';
+import 'package:farmacia_app/screens/signup/signup_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
 import 'package:farmacia_app/screens/themes/constants.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
@@ -125,8 +126,13 @@ class SessionSingin extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               pressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (_) => AuthenticationScreen()));
+                // Navigator.of(context).push(
+                //     MaterialPageRoute(builder: (_) => AuthenticationScreen()));
+
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (_) => SignupScreen(
+                          cpf: "107.695.394-83",
+                        )));
               },
             ),
           ),
