@@ -1,4 +1,4 @@
-import 'package:farmacia_app/modelos/user.dart';
+import 'package:farmacia_app/models/user.dart';
 import 'package:farmacia_app/repositories/user_repository.dart';
 import 'package:mobx/mobx.dart';
 

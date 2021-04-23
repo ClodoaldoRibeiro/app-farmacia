@@ -1,16 +1,18 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:farmacia_app/screens/themes/constants.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
-import 'package:farmacia_app/stores/authentication_store.dart';
+import 'package:farmacia_app/stores/signup_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class SignupScreen extends StatelessWidget {
-  SignupScreen({@required this.cpf});
+  SignupScreen({@required this.cpf}) {
+    store.setCPF(cpf);
+  }
   final String cpf;
 
-  AuthenticationStore store = AuthenticationStore();
+  SignupStore store = SignupStore();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class SignupScreen extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 10),
             child: TextFormField(
               keyboardType: TextInputType.number,
-              initialValue: cpf,
+              initialValue: store.CPF,
               enabled: false,
               decoration: InputDecoration(
                 labelText: "CPF",
@@ -60,17 +62,21 @@ class SignupScreen extends StatelessWidget {
               onChanged: (value) {},
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: "Seu e-mail",
-                border: const OutlineInputBorder(),
-                isDense: true,
-              ),
-              onChanged: (value) {},
-            ),
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      labelText: "Seu e-mail",
+                      errorText: store.emailErro,
+                      border: const OutlineInputBorder(),
+                      isDense: true,
+                    ),
+                    onChanged: store.setEmail),
+              );
+            },
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
@@ -81,7 +87,7 @@ class SignupScreen extends StatelessWidget {
                 border: const OutlineInputBorder(),
                 isDense: true,
               ),
-              onChanged: (value) {},
+              onChanged: store.setName,
             ),
           ),
           Padding(
@@ -93,7 +99,7 @@ class SignupScreen extends StatelessWidget {
                 border: const OutlineInputBorder(),
                 isDense: true,
               ),
-              onChanged: (value) {},
+              onChanged: store.setPhone,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,
                 TelefoneInputFormatter(),
@@ -114,7 +120,7 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
               obscureText: true,
-              onChanged: (value) {},
+              onChanged: store.setPassword,
             ),
           ),
           Padding(
@@ -139,7 +145,7 @@ class SignupScreen extends StatelessWidget {
                 ),
               ),
               obscureText: true,
-              onChanged: (value) {},
+              onChanged: store.setConfirmationPassword,
             ),
           ),
           Padding(

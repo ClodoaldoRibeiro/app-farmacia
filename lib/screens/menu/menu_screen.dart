@@ -75,7 +75,11 @@ class MenuScreen extends StatelessWidget {
           Observer(
             builder: (context) {
               if (managerStore.isLoggedIn)
-                return SairTile(onTap: () {});
+                return SairTile(onTap: () {
+                  if (FarDialogEysNo(context)) {
+                    managerStore.logout();
+                  }
+                });
               else
                 return Container();
             },
@@ -85,4 +89,28 @@ class MenuScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+bool FarDialogEysNo(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Text('Sair do aplicativo'),
+      content: Text('Tem certeza que deseja sair?'),
+      actions: [
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+          child: Text('Não'),
+        ),
+        FlatButton(
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          child: Text('Sim'),
+        ),
+      ],
+    ),
+  );
 }

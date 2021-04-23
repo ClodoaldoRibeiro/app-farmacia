@@ -1,18 +1,20 @@
+import 'package:farmacia_app/application_parse.dart';
+import 'package:farmacia_app/models/user.dart';
+import 'package:farmacia_app/repositories/user_repository.dart';
 import 'package:farmacia_app/screens/splash/splash_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
 import 'package:farmacia_app/stores/user_manager_store.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-
-
 void setupLocators() {
   // GetIt.I.registerSingleton(ConnectivityStore());
   GetIt.I.registerSingleton(UserManagerStore());
 }
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ApplicationParse.initializeParse();
   setupLocators();
   runApp(MyApp());
 }

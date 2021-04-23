@@ -1,5 +1,4 @@
 import 'package:farmacia_app/helper/validator.dart';
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 
 part 'authentication_store.g.dart';
@@ -50,4 +49,6 @@ abstract class _AuthenticationStore with Store {
 
   @observable
   String error;
+
+
 }

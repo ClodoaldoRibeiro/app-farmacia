@@ -1,4 +1,4 @@
-import 'package:farmacia_app/modelos/user.dart';
+import 'package:farmacia_app/models/user.dart';
 import 'package:farmacia_app/screens/authentication/authentication_screen.dart';
 import 'package:farmacia_app/screens/signup/signup_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
