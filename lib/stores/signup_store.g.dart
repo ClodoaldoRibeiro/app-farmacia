@@ -16,6 +16,33 @@ mixin _$SignupStore on _SignupStore, Store {
       (_$emailErroComputed ??= Computed<String>(() => super.emailErro,
               name: '_SignupStore.emailErro'))
           .value;
+  Computed<String> _$nameErroComputed;
+
+  @override
+  String get nameErro => (_$nameErroComputed ??=
+          Computed<String>(() => super.nameErro, name: '_SignupStore.nameErro'))
+      .value;
+  Computed<String> _$phoneErroComputed;
+
+  @override
+  String get phoneErro =>
+      (_$phoneErroComputed ??= Computed<String>(() => super.phoneErro,
+              name: '_SignupStore.phoneErro'))
+          .value;
+  Computed<String> _$passwordErroComputed;
+
+  @override
+  String get passwordErro =>
+      (_$passwordErroComputed ??= Computed<String>(() => super.passwordErro,
+              name: '_SignupStore.passwordErro'))
+          .value;
+  Computed<String> _$confirmationPasswordErroComputed;
+
+  @override
+  String get confirmationPasswordErro => (_$confirmationPasswordErroComputed ??=
+          Computed<String>(() => super.confirmationPasswordErro,
+              name: '_SignupStore.confirmationPasswordErro'))
+      .value;
   Computed<bool> _$isPasswordVisibilityComputed;
 
   @override
@@ -259,6 +286,10 @@ confirmationPassword: ${confirmationPassword},
 passwordVisibility: ${passwordVisibility},
 confirmationPasswordVisibility: ${confirmationPasswordVisibility},
 emailErro: ${emailErro},
+nameErro: ${nameErro},
+phoneErro: ${phoneErro},
+passwordErro: ${passwordErro},
+confirmationPasswordErro: ${confirmationPasswordErro},
 isPasswordVisibility: ${isPasswordVisibility},
 isConfirmationPasswordVisibility: ${isConfirmationPasswordVisibility}
     ''';

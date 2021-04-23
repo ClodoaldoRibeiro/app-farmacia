@@ -78,50 +78,67 @@ class SignupScreen extends StatelessWidget {
               );
             },
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextFormField(
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                labelText: "Nome completo",
-                border: const OutlineInputBorder(),
-                isDense: true,
-              ),
-              onChanged: store.setName,
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextFormField(
-              keyboardType: TextInputType.phone,
-              decoration: InputDecoration(
-                labelText: "Telefone celular",
-                border: const OutlineInputBorder(),
-                isDense: true,
-              ),
-              onChanged: store.setPhone,
-              inputFormatters: [
-                FilteringTextInputFormatter.digitsOnly,
-                TelefoneInputFormatter(),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextFormField(
-              keyboardType: TextInputType.name,
-              decoration: InputDecoration(
-                labelText: "Senha",
-                border: const OutlineInputBorder(),
-                isDense: true,
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.visibility_outlined),
-                  onPressed: () {},
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                    labelText: "Nome completo",
+                    errorText: store.nameErro,
+                    border: const OutlineInputBorder(),
+                    isDense: true,
+                  ),
+                  onChanged: store.setName,
                 ),
-              ),
-              obscureText: true,
-              onChanged: store.setPassword,
-            ),
+              );
+            },
+          ),
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                  keyboardType: TextInputType.phone,
+                  decoration: InputDecoration(
+                    labelText: "Telefone celular",
+                    errorText: store.phoneErro,
+                    border: const OutlineInputBorder(),
+                    isDense: true,
+                  ),
+                  onChanged: store.setPhone,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.digitsOnly,
+                    TelefoneInputFormatter(),
+                  ],
+                ),
+              );
+            },
+          ),
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(
+                    labelText: "Senha",
+                    errorText: store.passwordErro,
+                    border: const OutlineInputBorder(),
+                    isDense: true,
+                    suffixIcon: IconButton(
+                      icon: Icon(store.isPasswordVisibility
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined),
+                      onPressed: store.togglePasswordVisibility,
+                    ),
+                  ),
+                  obscureText: true,
+                  onChanged: store.setPassword,
+                ),
+              );
+            },
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
@@ -131,22 +148,29 @@ class SignupScreen extends StatelessWidget {
                   fontWeight: FontWeight.w300, color: Colors.grey[600]),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10),
-            child: TextFormField(
-              keyboardType: TextInputType.emailAddress,
-              decoration: InputDecoration(
-                labelText: "Confirme sua senha",
-                border: const OutlineInputBorder(),
-                isDense: true,
-                suffixIcon: IconButton(
-                  icon: Icon(Icons.visibility_outlined),
-                  onPressed: () {},
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    labelText: "Confirme sua senha",
+                    errorText: store.confirmationPasswordErro,
+                    border: const OutlineInputBorder(),
+                    isDense: true,
+                    suffixIcon: IconButton(
+                      icon: Icon(store.isConfirmationPasswordVisibility
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined),
+                      onPressed: store.toggleconfirmationPasswordVisibility,
+                    ),
+                  ),
+                  obscureText: true,
+                  onChanged: store.setConfirmationPassword,
                 ),
-              ),
-              obscureText: true,
-              onChanged: store.setConfirmationPassword,
-            ),
+              );
+            },
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 15),
