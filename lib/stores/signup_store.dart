@@ -121,7 +121,7 @@ abstract class _SignupStore with Store {
   }
 
   @observable
-  bool passwordVisibility;
+  bool passwordVisibility = false;
 
   @computed
   bool get isPasswordVisibility {
@@ -134,7 +134,7 @@ abstract class _SignupStore with Store {
   }
 
   @observable
-  bool confirmationPasswordVisibility;
+  bool confirmationPasswordVisibility = false;
 
   @computed
   bool get isConfirmationPasswordVisibility {

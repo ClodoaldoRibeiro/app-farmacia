@@ -134,7 +134,7 @@ class SignupScreen extends StatelessWidget {
                       onPressed: store.togglePasswordVisibility,
                     ),
                   ),
-                  obscureText: true,
+                  obscureText: !store.isPasswordVisibility,
                   onChanged: store.setPassword,
                 ),
               );
@@ -166,7 +166,7 @@ class SignupScreen extends StatelessWidget {
                       onPressed: store.toggleconfirmationPasswordVisibility,
                     ),
                   ),
-                  obscureText: true,
+                  obscureText: !store.isConfirmationPasswordVisibility,
                   onChanged: store.setConfirmationPassword,
                 ),
               );
