@@ -174,13 +174,9 @@ abstract class _SignupStore with Store {
     try {
       User user = User(
           CPF: CPF, nome: name, celular: phone, email: email, senha: password);
-
-      print("Usuário a incluir:   " + user.toString());
-
+      await Future.delayed(Duration(seconds: 10));
       final newUser = await UserRepository().signUp(user);
       GetIt.I<UserManagerStore>().setUser(user);
-
-      print("Usuário incluso com sucesso:   " + user.toString());
       loading = false;
     } catch (e) {
       erro = e;
@@ -189,6 +185,4 @@ abstract class _SignupStore with Store {
 
   @observable
   String erro;
-
-
 }

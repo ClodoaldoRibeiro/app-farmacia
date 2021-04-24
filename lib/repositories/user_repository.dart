@@ -35,7 +35,7 @@ class UserRepository {
   ///Converter o usuário response para um User do sistema.
   User mapParseToUser(ParseUser parseUser) {
     return User(
-      id: parseUser.objectId,
+      id: parseUser.get(keyUserId),
       CPF: parseUser.get(keyUserName),
       nome: parseUser.get(keyUserNomeCompleto),
       email: parseUser.get(keyUserEmail),

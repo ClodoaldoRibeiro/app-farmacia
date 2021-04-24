@@ -3,17 +3,37 @@ import 'package:farmacia_app/screens/themes/constants.dart';
 import 'package:farmacia_app/screens/widgets/far_error_box.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
 import 'package:farmacia_app/stores/signup_store.dart';
+import 'package:farmacia_app/stores/user_manager_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobx/mobx.dart';
 
-class SignupScreen extends StatelessWidget {
-  SignupScreen({@required this.cpf}) {
+class SignupScreen extends StatefulWidget {
+  SignupScreen({@required this.cpf});
+  final String cpf;
+
+  @override
+  _SignupScreenState createState() => _SignupScreenState(cpf: cpf);
+}
+
+class _SignupScreenState extends State<SignupScreen> {
+  _SignupScreenState({@required this.cpf}) {
     store.setCPF(cpf);
   }
   final String cpf;
-
   SignupStore store = SignupStore();
+  final UserManagerStore userManagerStore = GetIt.I<UserManagerStore>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    when((_) => userManagerStore.user != null, () {
+      Navigator.of(context).pop();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +63,11 @@ class SignupScreen extends StatelessWidget {
                 TextStyle(fontWeight: FontWeight.w600, color: Colors.grey[600]),
           ),
           SizedBox(
-            height: 32,
+            height: 25,
           ),
           Observer(
             builder: (context) {
-              return FarErrorBox(error: "Mensagem de erro, aqui é a mensagem ");
+              return FarErrorBox(error: store.erro);
             },
           ),
           Padding(
@@ -74,6 +94,7 @@ class SignupScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextFormField(
                     keyboardType: TextInputType.emailAddress,
+                    enabled: !store.loading,
                     decoration: InputDecoration(
                       labelText: "Seu e-mail",
                       errorText: store.emailErro,
@@ -90,6 +111,7 @@ class SignupScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextFormField(
                   keyboardType: TextInputType.name,
+                  enabled: !store.loading,
                   decoration: InputDecoration(
                     labelText: "Nome completo",
                     errorText: store.nameErro,
@@ -107,6 +129,7 @@ class SignupScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextFormField(
                   keyboardType: TextInputType.phone,
+                  enabled: !store.loading,
                   decoration: InputDecoration(
                     labelText: "Telefone celular",
                     errorText: store.phoneErro,
@@ -128,6 +151,7 @@ class SignupScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextFormField(
                   keyboardType: TextInputType.name,
+                  enabled: !store.loading,
                   decoration: InputDecoration(
                     labelText: "Senha",
                     errorText: store.passwordErro,
@@ -160,6 +184,7 @@ class SignupScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 10),
                 child: TextFormField(
                   keyboardType: TextInputType.emailAddress,
+                  enabled: !store.loading,
                   decoration: InputDecoration(
                     labelText: "Confirme sua senha",
                     errorText: store.confirmationPasswordErro,
@@ -182,7 +207,7 @@ class SignupScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 15),
             child: FarRaiseButton(
               child: Text("Continuar"),
-              pressed: () {},
+              pressed: store.signUpPressed,
             ),
           ),
         ],

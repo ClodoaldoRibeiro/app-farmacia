@@ -5,6 +5,7 @@ import 'package:farmacia_app/screens/menu/components/session_%20header.dart';
 import 'package:farmacia_app/screens/menu/components/session_tile.dart';
 import 'package:farmacia_app/screens/menu/components/user_session_tile.dart';
 import 'package:farmacia_app/screens/menu/components/version_app.dart';
+import 'package:farmacia_app/screens/widgets/dialog_eys_no.dart';
 import 'package:farmacia_app/stores/user_manager_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -75,10 +76,24 @@ class MenuScreen extends StatelessWidget {
           Observer(
             builder: (context) {
               if (managerStore.isLoggedIn)
-                return SairTile(onTap: () {
-                  if (FarDialogEysNo(context)) {
-                    managerStore.logout();
-                  }
+                return SairTile(onTap: () async {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return DialogEysNo(
+                        title: "Sair do aplicativo",
+                        content: "Deseja sair de sua conta?",
+                        onPressedEys: () {
+                          print("Saindo do app...");
+                          managerStore.logout();
+                          Navigator.pop(context);
+                        },
+                        onPressedNo: () {
+                          Navigator.pop(context);
+                        },
+                      );
+                    },
+                  );
                 });
               else
                 return Container();
@@ -89,28 +104,4 @@ class MenuScreen extends StatelessWidget {
       ),
     );
   }
-}
-
-bool FarDialogEysNo(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (_) => AlertDialog(
-      title: Text('Sair do aplicativo'),
-      content: Text('Tem certeza que deseja sair?'),
-      actions: [
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop(false);
-          },
-          child: Text('Não'),
-        ),
-        FlatButton(
-          onPressed: () {
-            Navigator.of(context).pop(true);
-          },
-          child: Text('Sim'),
-        ),
-      ],
-    ),
-  );
 }
