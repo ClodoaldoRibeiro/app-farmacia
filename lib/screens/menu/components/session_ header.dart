@@ -126,13 +126,13 @@ class SessionSingin extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.w600),
               ),
               pressed: () {
-                // Navigator.of(context).push(
-                //     MaterialPageRoute(builder: (_) => AuthenticationScreen()));
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => AuthenticationScreen()));
 
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (_) => SignupScreen(
-                          cpf: "107.695.394-83",
-                        )));
+                // Navigator.of(context).push(MaterialPageRoute(
+                //     builder: (_) => SignupScreen(
+                //           cpf: "107.695.394-83",
+                //         )));
               },
             ),
           ),

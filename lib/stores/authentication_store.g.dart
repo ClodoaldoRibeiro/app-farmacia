@@ -79,7 +79,7 @@ mixin _$AuthenticationStore on _AuthenticationStore, Store {
   final _$_sendAsyncAction = AsyncAction('_AuthenticationStore._send');
 
   @override
-  Future<void> _send() {
+  Future<bool> _send() {
     return _$_sendAsyncAction.run(() => super._send());
   }
 

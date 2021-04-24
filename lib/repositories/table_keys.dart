@@ -1,3 +1,5 @@
+const keyUserTable = 'user';
+
 const keyUserId = 'objectId';
 const keyUserName = 'CPF';
 const keyUserNomeCompleto = 'nome';

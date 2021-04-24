@@ -203,12 +203,20 @@ class _SignupScreenState extends State<SignupScreen> {
               );
             },
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: FarRaiseButton(
-              child: Text("Continuar"),
-              pressed: store.signUpPressed,
-            ),
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                child: FarRaiseButton(
+                  child: store.loading
+                      ? CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(Colors.white),
+                        )
+                      : Text("Continuar"),
+                  pressed: store.signUpPressed,
+                ),
+              );
+            },
           ),
         ],
       ),

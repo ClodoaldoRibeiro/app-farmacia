@@ -1,4 +1,6 @@
 import 'package:farmacia_app/helper/validator.dart';
+import 'package:farmacia_app/models/user.dart';
+import 'package:farmacia_app/repositories/user_repository.dart';
 import 'package:mobx/mobx.dart';
 
 part 'authentication_store.g.dart';
@@ -32,14 +34,20 @@ abstract class _AuthenticationStore with Store {
   Function get sendPressed => formValid ? _send : null;
 
   @action
-  Future<void> _send() async {
+  Future<bool> _send() async {
     loading = true;
     try {
       // await AdRepository().save(ad);
       // savedAd = true;
-      await Future.delayed(Duration(seconds: 10));
+      List<User> users = await UserRepository().existingAccount(cpf);
+
+      if (users != null)
+        return true;
+      else
+        return false;
     } catch (e) {
       error = e;
+      return false;
     }
     loading = false;
   }
@@ -49,6 +57,4 @@ abstract class _AuthenticationStore with Store {
 
   @observable
   String error;
-
-
 }

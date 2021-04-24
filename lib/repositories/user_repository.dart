@@ -32,6 +32,24 @@ class UserRepository {
   // }
   //
 
+  Future<List<User>> existingAccount(String CPF) async {
+    try {
+      final queryBuilder = QueryBuilder<ParseObject>(ParseObject(keyUserTable));
+      queryBuilder.whereEqualTo(keyUserName, CPF);
+
+      final response = await queryBuilder.query();
+
+      if (response.success && response.results != null) {
+        return response.results.map((po) => mapParseToUser(po)).toList();
+      } else if (response.success && response.results == null) {
+        return [];
+      } else {
+        return Future.error(ParseErrors.getDescription(response.error.code));
+      }
+    } catch (e) {}
+    return Future.error("Falha da conecxão");
+  }
+
   ///Converter o usuário response para um User do sistema.
   User mapParseToUser(ParseUser parseUser) {
     return User(

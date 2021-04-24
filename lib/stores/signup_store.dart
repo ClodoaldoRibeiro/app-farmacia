@@ -177,10 +177,11 @@ abstract class _SignupStore with Store {
       await Future.delayed(Duration(seconds: 10));
       final newUser = await UserRepository().signUp(user);
       GetIt.I<UserManagerStore>().setUser(user);
-      loading = false;
     } catch (e) {
       erro = e;
     }
+
+    loading = false;
   }
 
   @observable
