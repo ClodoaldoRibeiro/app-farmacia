@@ -1,3 +1,7 @@
+import 'package:farmacia_app/models/user.dart';
+import 'package:farmacia_app/repositories/user_repository.dart';
+import 'package:farmacia_app/stores/user_manager_store.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 import 'package:farmacia_app/helper/extension.dart';
 
@@ -145,4 +149,46 @@ abstract class _SignupStore with Store {
   void toggleconfirmationPasswordVisibility() {
     confirmationPasswordVisibility = !confirmationPasswordVisibility;
   }
+
+  @computed
+  bool get isFormValid {
+    return nomeValid &&
+        emailValid &&
+        phoneValid &&
+        passwordValid &&
+        confirmationPasswordValid;
+  }
+
+  @computed
+  Function get signUpPressed {
+    return (isFormValid && !loading) ? signUp : null;
+  }
+
+  @observable
+  bool loading = false;
+
+  @action
+  Future<void> signUp() async {
+    loading = true;
+
+    try {
+      User user = User(
+          CPF: CPF, nome: name, celular: phone, email: email, senha: password);
+
+      print("Usuário a incluir:   " + user.toString());
+
+      final newUser = await UserRepository().signUp(user);
+      GetIt.I<UserManagerStore>().setUser(user);
+
+      print("Usuário incluso com sucesso:   " + user.toString());
+      loading = false;
+    } catch (e) {
+      erro = e;
+    }
+  }
+
+  @observable
+  String erro;
+
+
 }

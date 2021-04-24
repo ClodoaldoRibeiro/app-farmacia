@@ -1,5 +1,6 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:farmacia_app/screens/themes/constants.dart';
+import 'package:farmacia_app/screens/widgets/far_error_box.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
 import 'package:farmacia_app/stores/signup_store.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,11 @@ class SignupScreen extends StatelessWidget {
           ),
           SizedBox(
             height: 32,
+          ),
+          Observer(
+            builder: (context) {
+              return FarErrorBox(error: "Mensagem de erro, aqui é a mensagem ");
+            },
           ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),

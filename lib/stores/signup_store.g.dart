@@ -58,6 +58,20 @@ mixin _$SignupStore on _SignupStore, Store {
               () => super.isConfirmationPasswordVisibility,
               name: '_SignupStore.isConfirmationPasswordVisibility'))
           .value;
+  Computed<bool> _$isFormValidComputed;
+
+  @override
+  bool get isFormValid =>
+      (_$isFormValidComputed ??= Computed<bool>(() => super.isFormValid,
+              name: '_SignupStore.isFormValid'))
+          .value;
+  Computed<Function> _$signUpPressedComputed;
+
+  @override
+  Function get signUpPressed =>
+      (_$signUpPressedComputed ??= Computed<Function>(() => super.signUpPressed,
+              name: '_SignupStore.signUpPressed'))
+          .value;
 
   final _$CPFAtom = Atom(name: '_SignupStore.CPF');
 
@@ -184,6 +198,43 @@ mixin _$SignupStore on _SignupStore, Store {
     });
   }
 
+  final _$loadingAtom = Atom(name: '_SignupStore.loading');
+
+  @override
+  bool get loading {
+    _$loadingAtom.reportRead();
+    return super.loading;
+  }
+
+  @override
+  set loading(bool value) {
+    _$loadingAtom.reportWrite(value, super.loading, () {
+      super.loading = value;
+    });
+  }
+
+  final _$erroAtom = Atom(name: '_SignupStore.erro');
+
+  @override
+  String get erro {
+    _$erroAtom.reportRead();
+    return super.erro;
+  }
+
+  @override
+  set erro(String value) {
+    _$erroAtom.reportWrite(value, super.erro, () {
+      super.erro = value;
+    });
+  }
+
+  final _$signUpAsyncAction = AsyncAction('_SignupStore.signUp');
+
+  @override
+  Future<void> signUp() {
+    return _$signUpAsyncAction.run(() => super.signUp());
+  }
+
   final _$_SignupStoreActionController = ActionController(name: '_SignupStore');
 
   @override
@@ -285,13 +336,17 @@ password: ${password},
 confirmationPassword: ${confirmationPassword},
 passwordVisibility: ${passwordVisibility},
 confirmationPasswordVisibility: ${confirmationPasswordVisibility},
+loading: ${loading},
+erro: ${erro},
 emailErro: ${emailErro},
 nameErro: ${nameErro},
 phoneErro: ${phoneErro},
 passwordErro: ${passwordErro},
 confirmationPasswordErro: ${confirmationPasswordErro},
 isPasswordVisibility: ${isPasswordVisibility},
-isConfirmationPasswordVisibility: ${isConfirmationPasswordVisibility}
+isConfirmationPasswordVisibility: ${isConfirmationPasswordVisibility},
+isFormValid: ${isFormValid},
+signUpPressed: ${signUpPressed}
     ''';
   }
 }
