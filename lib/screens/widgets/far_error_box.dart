@@ -6,8 +6,7 @@ class FarErrorBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (error == null) return Container();
-
+    if (error == null || error.isEmpty) return Container();
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(

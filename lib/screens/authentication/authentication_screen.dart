@@ -1,5 +1,6 @@
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:farmacia_app/screens/signup/signup_screen.dart';
+import 'package:farmacia_app/screens/singin/singin_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
 import 'package:farmacia_app/screens/themes/constants.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
@@ -85,7 +86,9 @@ class AuthenticationScreen extends StatelessWidget {
 
                         if (cadastrado) {
                           Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Container(),
+                            builder: (context) => SingInScreen(
+                              cpf: store.cpf,
+                            ),
                           ));
                         } else {
                           Navigator.of(context).push(MaterialPageRoute(
