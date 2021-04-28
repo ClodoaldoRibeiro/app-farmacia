@@ -1,4 +1,5 @@
 import 'package:brasil_fields/brasil_fields.dart';
+import 'package:farmacia_app/screens/signup/signup_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
 import 'package:farmacia_app/screens/themes/constants.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
@@ -78,7 +79,23 @@ class AuthenticationScreen extends StatelessWidget {
                         valueColor: AlwaysStoppedAnimation(Colors.white),
                       )
                     : Text("Continuar"),
-                pressed: store.sendPressed,
+                pressed: store.formValid
+                    ? () async {
+                        bool cadastrado = await store.existingAccount();
+
+                        if (cadastrado) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => Container(),
+                          ));
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => SignupScreen(
+                              cpf: store.cpf,
+                            ),
+                          ));
+                        }
+                      }
+                    : null,
               );
             },
           )

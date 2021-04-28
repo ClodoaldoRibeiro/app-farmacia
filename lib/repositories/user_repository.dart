@@ -4,7 +4,7 @@ import 'package:farmacia_app/repositories/table_keys.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 
 class UserRepository {
-  /// Criar usuáriso no Parser Server
+  /// Cria um usuário no Parser Server
   Future<User> signUp(User user) async {
     ParseUser parseUser = ParseUser(user.CPF, user.senha, user.email);
     parseUser.set<String>(keyUserNomeCompleto, user.nome);
@@ -30,11 +30,12 @@ class UserRepository {
   //     return Future.error(ParseErrors.getDescription(response.error.code));
   //   }
   // }
-  //
 
+  ///Verifica se existe usuário cadastrado para o CPF informado
   Future<List<User>> existingAccount(String CPF) async {
     try {
-      final queryBuilder = QueryBuilder<ParseObject>(ParseObject(keyUserTable));
+      final QueryBuilder<ParseObject> queryBuilder =
+          QueryBuilder<ParseObject>(ParseObject(keyUserTable));
       queryBuilder.whereEqualTo(keyUserName, CPF);
 
       final response = await queryBuilder.query();
@@ -46,23 +47,27 @@ class UserRepository {
       } else {
         return Future.error(ParseErrors.getDescription(response.error.code));
       }
-    } catch (e) {}
-    return Future.error("Falha da conecxão");
+    } catch (e) {
+      return Future.error("Falha da conecxão");
+    }
   }
 
+  //
+
   ///Converter o usuário response para um User do sistema.
-  User mapParseToUser(ParseUser parseUser) {
+  User mapParseToUser(ParseObject object) {
     return User(
-      id: parseUser.get(keyUserId),
-      CPF: parseUser.get(keyUserName),
-      nome: parseUser.get(keyUserNomeCompleto),
-      email: parseUser.get(keyUserEmail),
-      celular: parseUser.get(keyUserPhone),
-      senha: parseUser.get(keyUserPassword),
-      createdAt: parseUser.get(keyUserCreatedAt),
+      id: object.objectId,
+      CPF: object.get(keyUserName),
+      nome: object.get(keyUserNomeCompleto),
+      email: object.get(keyUserEmail),
+      celular: object.get(keyUserPhone),
+      senha: object.get(keyUserPassword),
+      // createdAt: parseUser.get(keyUserCreatedAt),
     );
   }
 
+  /// Pega o usuário que está ativo para o dispositivo no parser server
   Future<User> currentUser() async {
     final parseUser = await ParseUser.currentUser();
     if (parseUser != null) {
@@ -77,6 +82,7 @@ class UserRepository {
     return null;
   }
 
+  /// Faz o logoff no sitema do parser server
   Future<void> logout() async {
     final ParseUser currentUser = await ParseUser.currentUser();
     await currentUser.logout();
@@ -94,32 +100,31 @@ class UserRepository {
   //   }
   // }
   //
-  // Future<void> save(User user) async {
-  //   final ParseUser parseUser = await ParseUser.currentUser();
-  //
-  //   if (parseUser != null) {
-  //     parseUser.set<String>(keyUserName, user.nome);
-  //     parseUser.set<String>(keyUserPhone, user.phone);
-  //     parseUser.set<int>(keyUserType, user.type.index);
-  //
-  //     if (user.senha != null) {
-  //       parseUser.password = user.senha;
-  //     }
-  //
-  //     final response = await parseUser.save();
-  //
-  //     if (!response.success)
-  //       return Future.error(ParseErrors.getDescription(response.error.code));
-  //
-  //     if (user.senha != null) {
-  //       await parseUser.logout();
-  //
-  //       final loginResponse =
-  //           await ParseUser(user.email, user.senha, user.email).login();
-  //
-  //       if (!loginResponse.success)
-  //         return Future.error(ParseErrors.getDescription(response.error.code));
-  //     }
-  //   }
-  // }
+  Future<void> save(User user) async {
+    final ParseUser parseUser = await ParseUser.currentUser();
+
+    if (parseUser != null) {
+      parseUser.set<String>(keyUserName, user.nome);
+      parseUser.set<String>(keyUserPhone, user.celular);
+
+      if (user.senha != null) {
+        parseUser.password = user.senha;
+      }
+
+      final response = await parseUser.save();
+
+      if (!response.success)
+        return Future.error(ParseErrors.getDescription(response.error.code));
+
+      if (user.senha != null) {
+        await parseUser.logout();
+
+        final loginResponse =
+            await ParseUser(user.email, user.senha, user.email).login();
+
+        if (!loginResponse.success)
+          return Future.error(ParseErrors.getDescription(response.error.code));
+      }
+    }
+  }
 }

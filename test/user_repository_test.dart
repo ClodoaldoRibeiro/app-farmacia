@@ -1,28 +1,19 @@
 import 'package:farmacia_app/application_parse.dart';
 import 'package:farmacia_app/models/user.dart';
 import 'package:farmacia_app/repositories/user_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() async {
-  setUp(() async {
-    WidgetsFlutterBinding.ensureInitialized();
+  test("Buscar usuário por CPF", () async {
     await ApplicationParse.initializeParse();
-  });
 
-  test("Test de incluir um usuário no parse server", () async {
+    try {
+      List<User> users =
+          await UserRepository().existingAccount('107.695.394-83');
 
-    User novo = User(
-        CPF: "107.695.394-83",
-        celular: "(87) 98823-8796",
-        email: "clodoribeiro38@gmail.com",
-        nome: "Clodoaldo Ribeiro Santos",
-        senha: "123456");
+      print('Usuário recuperado: ${users} ');
+    } catch (e) {
 
-    // User user = await UserRepository().signUp(novo);
-
-    // print(user);
-
-    expect(UserRepository().signUp(novo), User);
+    }
   });
 }

@@ -31,25 +31,25 @@ abstract class _AuthenticationStore with Store {
   }
 
   @computed
-  Function get sendPressed => formValid ? _send : null;
+  Function get sendPressed => formValid ? existingAccount : null;
 
   @action
-  Future<bool> _send() async {
+  Future<bool> existingAccount() async {
+    bool cadastrado = false;
+
     loading = true;
     try {
-      // await AdRepository().save(ad);
-      // savedAd = true;
+      print("cpf: ${cpf}");
       List<User> users = await UserRepository().existingAccount(cpf);
 
-      if (users != null)
-        return true;
-      else
-        return false;
+      print("users:  ${users}");
+      if (users != null) cadastrado = true;
     } catch (e) {
       error = e;
-      return false;
     }
+
     loading = false;
+    return cadastrado;
   }
 
   @observable

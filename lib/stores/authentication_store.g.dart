@@ -76,11 +76,12 @@ mixin _$AuthenticationStore on _AuthenticationStore, Store {
     });
   }
 
-  final _$_sendAsyncAction = AsyncAction('_AuthenticationStore._send');
+  final _$existingAccountAsyncAction =
+      AsyncAction('_AuthenticationStore.existingAccount');
 
   @override
-  Future<bool> _send() {
-    return _$_sendAsyncAction.run(() => super._send());
+  Future<bool> existingAccount() {
+    return _$existingAccountAsyncAction.run(() => super.existingAccount());
   }
 
   final _$_AuthenticationStoreActionController =
