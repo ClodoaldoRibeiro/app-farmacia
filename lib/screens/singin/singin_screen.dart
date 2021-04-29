@@ -1,4 +1,6 @@
 import 'package:brasil_fields/formatter/cpf_input_formatter.dart';
+import 'package:farmacia_app/screens/resetpassword/reset_password.dart';
+import 'package:farmacia_app/screens/themes/app_colors.dart';
 import 'package:farmacia_app/screens/themes/constants.dart';
 import 'package:farmacia_app/screens/widgets/far_error_box.dart';
 import 'package:farmacia_app/screens/widgets/far_raise_button.dart';
@@ -21,14 +23,14 @@ class SingInScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        title: Text("Cadastrar"),
+        title: Text("Entrar"),
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         children: [
           Container(
             padding: EdgeInsets.all(16),
-            height: size.height * 0.30,
+            height: size.height * 0.22,
             child: Center(
               child: Image.asset(kIMAGE_LOGO_PNG),
             ),
@@ -37,7 +39,7 @@ class SingInScreen extends StatelessWidget {
             height: 20,
           ),
           Text(
-            "Informe os seus dados para entrar",
+            "Informe os seus dados para entrar no app",
             style:
                 TextStyle(fontWeight: FontWeight.w600, color: Colors.grey[600]),
           ),
@@ -75,7 +77,7 @@ class SingInScreen extends StatelessWidget {
                   keyboardType: TextInputType.name,
                   enabled: !store.loading,
                   decoration: InputDecoration(
-                    labelText: "Senha",
+                    labelText: "Sua senha",
                     errorText: store.passwordErro,
                     border: const OutlineInputBorder(),
                     isDense: true,
@@ -106,6 +108,22 @@ class SingInScreen extends StatelessWidget {
                 ),
               );
             },
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => ResetPassaword(),
+              ));
+            },
+            child: Text(
+              "Não lembro a minha senha",
+              style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  color: AppColors.COR_PRIMARIA,
+                  fontSize: 14,
+                  decoration: TextDecoration.underline),
+              softWrap: true,
+            ),
           ),
         ],
       ),
