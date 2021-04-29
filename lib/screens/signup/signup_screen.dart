@@ -32,6 +32,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
     when((_) => userManagerStore.user != null, () {
       Navigator.of(context).pop();
+      Navigator.of(context).pop();
     });
   }
 

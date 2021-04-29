@@ -99,6 +99,21 @@ mixin _$SinginStore on _SinginStore, Store {
     });
   }
 
+  final _$CPFAtom = Atom(name: '_SinginStore.CPF');
+
+  @override
+  String get CPF {
+    _$CPFAtom.reportRead();
+    return super.CPF;
+  }
+
+  @override
+  set CPF(String value) {
+    _$CPFAtom.reportWrite(value, super.CPF, () {
+      super.CPF = value;
+    });
+  }
+
   final _$signInAsyncAction = AsyncAction('_SinginStore.signIn');
 
   @override
@@ -131,12 +146,24 @@ mixin _$SinginStore on _SinginStore, Store {
   }
 
   @override
+  void setCPF(String valeu) {
+    final _$actionInfo =
+        _$_SinginStoreActionController.startAction(name: '_SinginStore.setCPF');
+    try {
+      return super.setCPF(valeu);
+    } finally {
+      _$_SinginStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 passwordVisibility: ${passwordVisibility},
 password: ${password},
 loading: ${loading},
 erro: ${erro},
+CPF: ${CPF},
 isPasswordVisibility: ${isPasswordVisibility},
 passwordErro: ${passwordErro},
 isFormValid: ${isFormValid},

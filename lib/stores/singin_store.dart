@@ -1,3 +1,7 @@
+import 'package:farmacia_app/models/user.dart';
+import 'package:farmacia_app/repositories/user_repository.dart';
+import 'package:farmacia_app/stores/user_manager_store.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobx/mobx.dart';
 
 part 'singin_store.g.dart';
@@ -53,15 +57,30 @@ abstract class _SinginStore with Store {
     return (isFormValid && !loading) ? signIn : null;
   }
 
+  @observable
+  String erro;
+
   @action
   Future<void> signIn() async {
     loading = true;
+    erro = null;
 
-    Future.delayed(Duration(seconds: 5));
+    try {
+      final user = await UserRepository().loginWithEmail(CPF, password);
+      GetIt.I<UserManagerStore>().setUser(user);
+    } catch (e) {
+      print(e);
+      erro = e;
+    }
 
     loading = false;
   }
 
   @observable
-  String erro;
+  String CPF;
+
+  @action
+  void setCPF(String valeu) {
+    CPF = valeu;
+  }
 }

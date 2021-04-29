@@ -18,18 +18,17 @@ class UserRepository {
       return Future.error(ParseErrors.getDescription(response.error.code));
     }
   }
-  //
-  // Future<User> loginWithEmail(String email, String password) async {
-  //   final parseruser = ParseUser(email, password, null);
-  //
-  //   final response = await parseruser.login();
-  //
-  //   if (response.success) {
-  //     return mapParseToUser(response.result);
-  //   } else {
-  //     return Future.error(ParseErrors.getDescription(response.error.code));
-  //   }
-  // }
+
+  Future<User> loginWithEmail(String cpf, String password) async {
+    final parseruser = ParseUser(cpf, password, null);
+    final response = await parseruser.login();
+
+    if (response.success) {
+      return mapParseToUser(response.result);
+    } else {
+      return Future.error(ParseErrors.getDescription(response.error.code));
+    }
+  }
 
   ///Verifica se existe usuário cadastrado para o CPF informado
   Future<List<User>> existingAccount(String CPF) async {
