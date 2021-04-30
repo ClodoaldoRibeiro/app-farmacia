@@ -31,7 +31,7 @@ class UserRepository {
   }
 
   ///Verifica se existe usuário cadastrado para o CPF informado
-  Future<List<User>> existingAccount(String CPF) async {
+  Future<List<User>> getUserByCPF(String CPF) async {
     try {
       final QueryBuilder<ParseObject> queryBuilder =
           QueryBuilder<ParseObject>(ParseObject(keyUserTable));
@@ -87,18 +87,18 @@ class UserRepository {
     await currentUser.logout();
   }
 
-  // Future<User> doUserResetPassword(String email) async {
-  //   final parseruser = ParseUser(null, null, email);
-  //
-  //   final response = await parseruser.requestPasswordReset();
-  //
-  //   if (response.success) {
-  //     return mapParseToUser(response.result);
-  //   } else {
-  //     return Future.error(ParseErrors.getDescription(response.error.code));
-  //   }
-  // }
-  //
+  Future<User> doUserResetPassword(email) async {
+    final parseruser = ParseUser(null, null, email);
+
+    final response = await parseruser.requestPasswordReset();
+
+    if (response.success) {
+      return mapParseToUser(response.result);
+    } else {
+      return Future.error(ParseErrors.getDescription(response.error.code));
+    }
+  }
+
   Future<void> save(User user) async {
     final ParseUser parseUser = await ParseUser.currentUser();
 

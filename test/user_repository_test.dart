@@ -9,7 +9,7 @@ void main() async {
 
     try {
       List<User> users =
-          await UserRepository().existingAccount('107.695.394-83');
+          await UserRepository().getUserByCPF('107.695.394-83');
 
       print('Usuário recuperado: ${users} ');
     } catch (e) {

@@ -40,7 +40,7 @@ abstract class _AuthenticationStore with Store {
     loading = true;
     try {
       print("cpf: ${cpf}");
-      List<User> users = await UserRepository().existingAccount(cpf);
+      List<User> users = await UserRepository().getUserByCPF(cpf);
 
       print("users:  ${users.length}");
       if (users != null && users.length > 0) cadastrado = true;
