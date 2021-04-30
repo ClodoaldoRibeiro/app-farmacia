@@ -1,3 +1,4 @@
+import 'package:farmacia_app/screens/attendance/attendance_screen.dart';
 import 'package:farmacia_app/screens/menu/components/buttom_tile.dart';
 import 'package:farmacia_app/screens/menu/components/menu_tili.dart';
 import 'package:farmacia_app/screens/menu/components/sair_tile.dart';
@@ -62,7 +63,11 @@ class MenuScreen extends StatelessWidget {
             MenuTile(
               icon: Icons.phone_rounded,
               titulo: "Central de relacionamento",
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => AttendanceScreen(),
+                ));
+              },
             ),
             MenuTile(
               icon: Icons.business_rounded,
