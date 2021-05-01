@@ -1,4 +1,5 @@
 import 'package:farmacia_app/models/user.dart';
+import 'package:farmacia_app/screens/account/account_screen.dart';
 import 'package:farmacia_app/screens/authentication/authentication_screen.dart';
 import 'package:farmacia_app/screens/signup/signup_screen.dart';
 import 'package:farmacia_app/screens/themes/app_colors.dart';
@@ -50,7 +51,11 @@ class SessionLogin extends StatelessWidget {
                 ),
                 FlatButton(
                   padding: EdgeInsets.zero,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => AccountScreen(),
+                    ));
+                  },
                   child: Text(
                     "Alterar perfil",
                     softWrap: true,

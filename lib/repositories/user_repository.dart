@@ -103,7 +103,9 @@ class UserRepository {
     final ParseUser parseUser = await ParseUser.currentUser();
 
     if (parseUser != null) {
-      parseUser.set<String>(keyUserName, user.nome);
+      parseUser.set<String>(keyUserName, user.CPF);
+      parseUser.set<String>(keyUserNomeCompleto, user.nome);
+      parseUser.set<String>(keyUserEmail, user.email);
       parseUser.set<String>(keyUserPhone, user.celular);
 
       if (user.senha != null) {
