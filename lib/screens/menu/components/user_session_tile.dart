@@ -1,3 +1,4 @@
+import 'package:farmacia_app/screens/changepassword/change_password_screen.dart';
 import 'package:farmacia_app/screens/menu/components/menu_tili.dart';
 import 'package:farmacia_app/screens/menu/components/session_tile.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,11 @@ class UserSessionTile extends StatelessWidget {
         MenuTile(
           icon: Icons.vpn_key_rounded,
           titulo: "Alterar senha",
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ChangePasswordScreen(),
+            ));
+          },
         ),
       ],
     );
