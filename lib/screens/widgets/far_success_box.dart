@@ -16,7 +16,7 @@ class FarSuccessBox extends StatelessWidget {
       child: Row(
         children: [
           Icon(
-            Icons.mark_email_read_outlined,
+            Icons.thumb_up_outlined,
             color: Colors.white,
             size: 40,
           ),

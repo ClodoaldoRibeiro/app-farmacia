@@ -21,6 +21,7 @@ abstract class _ChangePasswordStore with Store {
 
   @action
   void setPassword(String valeu) {
+    reset();
     password = valeu;
   }
 
@@ -43,6 +44,7 @@ abstract class _ChangePasswordStore with Store {
 
   @action
   void setConfirmationPassword(String valeu) {
+    reset();
     confirmationPassword = valeu;
   }
 
@@ -100,7 +102,7 @@ abstract class _ChangePasswordStore with Store {
   @action
   Future<void> _save() async {
     loading = true;
-
+    reset();
     user.senha = password;
     try {
       await UserRepository().save(user);
