@@ -6,6 +6,7 @@ import 'package:farmacia_app/screens/menu/components/session_%20header.dart';
 import 'package:farmacia_app/screens/menu/components/session_tile.dart';
 import 'package:farmacia_app/screens/menu/components/user_session_tile.dart';
 import 'package:farmacia_app/screens/menu/components/version_app.dart';
+import 'package:farmacia_app/screens/places/place_screen.dart';
 import 'package:farmacia_app/screens/widgets/dialog_yes_no.dart';
 import 'package:farmacia_app/stores/user_manager_store.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,11 @@ class MenuScreen extends StatelessWidget {
             MenuTile(
               icon: Icons.business_rounded,
               titulo: "Lojas",
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => PlaceScreen(),
+                ));
+              },
             ),
             MenuTile(
               icon: Icons.star_rounded,

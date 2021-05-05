@@ -71,6 +71,24 @@ class _SignupScreenState extends State<SignupScreen> {
               return FarErrorBox(error: store.erro);
             },
           ),
+          Observer(
+            builder: (context) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: TextFormField(
+                  keyboardType: TextInputType.name,
+                  enabled: !store.loading,
+                  decoration: InputDecoration(
+                    labelText: "Nome completo",
+                    errorText: store.nameErro,
+                    border: const OutlineInputBorder(),
+                    isDense: true,
+                  ),
+                  onChanged: store.setName,
+                ),
+              );
+            },
+          ),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 10),
             child: TextFormField(
@@ -103,24 +121,6 @@ class _SignupScreenState extends State<SignupScreen> {
                       isDense: true,
                     ),
                     onChanged: store.setEmail),
-              );
-            },
-          ),
-          Observer(
-            builder: (context) {
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: TextFormField(
-                  keyboardType: TextInputType.name,
-                  enabled: !store.loading,
-                  decoration: InputDecoration(
-                    labelText: "Nome completo",
-                    errorText: store.nameErro,
-                    border: const OutlineInputBorder(),
-                    isDense: true,
-                  ),
-                  onChanged: store.setName,
-                ),
               );
             },
           ),
