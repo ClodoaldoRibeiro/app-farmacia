@@ -16,7 +16,7 @@ class PlaceTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           SizedBox(
-            height: 170.0,
+            height: 150.0,
             child: Image.network(
               place.image,
               fit: BoxFit.cover,

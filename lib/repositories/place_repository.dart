@@ -12,8 +12,6 @@ class PlaceRepository {
 
       final response = await queryBuilder.query();
 
-      print(response.results);
-
       if (response.success && response.results != null) {
         return response.results.map((po) => Place.fromParse(po)).toList();
       } else if (response.success && response.results == null) {
